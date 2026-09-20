@@ -323,22 +323,28 @@ def render_main_dashboard():
     pending_doc_reqs = db.get_pending_doc_requests(user_level) if user_level >= 3 else []
     active_grants = db.get_user_active_doc_grants(user_name)
 
-    # Top Navbar
-    st.markdown(f"""
-    <div class="top-navbar">
-        <div>
-            <div style="display:flex; align-items:center; gap:12px;">
-                <span style="font-size:1.2rem; font-weight:800; color:#f8fafc;">👤 {user_name}</span>
+    # Top Navbar & Header Controls
+    c_nav_left, c_nav_right = st.columns([3.6, 1.4])
+    with c_nav_left:
+        st.markdown(f"""
+        <div class="top-navbar" style="margin-bottom:0; padding:12px 18px;">
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                <span style="font-size:1.15rem; font-weight:800; color:#f8fafc;">👤 {user_name}</span>
                 {get_clearance_badge_html(user_level)}
-                <span style="color:#475569; font-size:0.8rem; font-weight:500;">•  {user['role']}</span>
+                <span style="color:#64748b; font-size:0.8rem; font-weight:500;">• {user['role']}</span>
+                <span class="status-pill" style="margin-left:6px;"><span class="status-dot"></span>ACTIVE SESSION</span>
             </div>
         </div>
-        <div class="status-pill">
-            <span class="status-dot"></span>
-            ACTIVE SESSION
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+    with c_nav_right:
+        st.write("")
+        if st.button("🚪 Logout", key="header_logout_btn", use_container_width=True, help="Terminate current enterprise session"):
+            st.session_state["authenticated_user"] = None
+            st.session_state["messages"] = []
+            st.session_state["active_nav"] = "chat"
+            st.rerun()
+
+    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
 
     # Active JIT Access Banner
     if active_grants:
