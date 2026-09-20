@@ -350,6 +350,37 @@ def render_main_dashboard():
             </div>
             """, unsafe_allow_html=True)
 
+    # Quick Top Navigation Bar (ensures all views are instantly accessible even if sidebar is closed)
+    current_nav = st.session_state.get("active_nav", "chat")
+    unread_notifs = db.get_unread_notification_count(user_name)
+    inbox_badge = f" ({unread_notifs})" if unread_notifs > 0 else ""
+
+    top_nav_items = [
+        ("chat", "💬 Chat Assistant"),
+        ("inbox", f"📬 Inbox{inbox_badge}"),
+        ("jit_request", "🔑 Access & Grants"),
+    ]
+    if user_level >= 3:
+        d_badge = f" ({len(pending_doc_reqs)})" if pending_doc_reqs else ""
+        top_nav_items.append(("doc_approvals", f"📋 Approvals{d_badge}"))
+    if user_level == 4:
+        total_exec_pending = len(pending_user_reqs) + len(pending_escalation_reqs)
+        u_badge = f" ({total_exec_pending})" if total_exec_pending > 0 else ""
+        top_nav_items.append(("user_approvals", f"👥 Governance{u_badge}"))
+        top_nav_items.append(("audit", "📊 Telemetry"))
+    elif user_level == 2:
+        top_nav_items.append(("firewall", "🛡️ Threat Lab"))
+
+    nav_cols = st.columns(len(top_nav_items))
+    for i, (n_key, n_label) in enumerate(top_nav_items):
+        with nav_cols[i]:
+            is_active = (current_nav == n_key)
+            if st.button(n_label, key=f"topnav_{n_key}", use_container_width=True, type="primary" if is_active else "secondary"):
+                st.session_state["active_nav"] = n_key
+                st.rerun()
+
+    st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
+
     # Sidebar Navigation Menu
     with st.sidebar:
         st.markdown(f"""
