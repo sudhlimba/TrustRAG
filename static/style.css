@@ -7,11 +7,42 @@
 
 /* ── Reset Streamlit Chrome ─────────────────────────────────────────────── */
 #MainMenu { visibility: hidden !important; }
-header[data-testid="stHeader"] { display: none !important; }
 footer { visibility: hidden !important; }
+header [data-testid="stToolbar"] { visibility: hidden !important; }
+header [data-testid="stDecoration"] { display: none !important; }
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    height: 3rem !important;
+    z-index: 99 !important;
+}
+
+/* Ensure sidebar collapsed toggle button is ALWAYS visible, accessible & styled */
+[data-testid="collapsedControl"],
+button[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarCollapseButton"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #38bdf8 !important;
+    background: rgba(13, 20, 36, 0.9) !important;
+    border: 1px solid rgba(56, 189, 248, 0.45) !important;
+    border-radius: 8px !important;
+    margin: 8px !important;
+    z-index: 999999 !important;
+    transition: all 0.2s ease !important;
+}
+
+[data-testid="collapsedControl"]:hover,
+button[data-testid="stSidebarCollapsedControl"]:hover,
+[data-testid="stSidebarCollapseButton"]:hover {
+    background: rgba(56, 189, 248, 0.2) !important;
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.35) !important;
+}
 
 .block-container {
-    padding-top: 1.2rem !important;
+    padding-top: 1rem !important;
     padding-bottom: 2rem !important;
     max-width: 1360px !important;
 }
