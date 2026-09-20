@@ -141,33 +141,54 @@ def check_vector_threat_similarity(prompt: str, threshold: float = config.THREAT
     Therefore, cosine_similarity = 1 - distance.
     If similarity > threshold (default 0.82), we flag as attack!
     """
-    client = get_chroma_client()
-    embed_fn = get_embedding_function()
-    collection = client.get_or_create_collection(
-        name=config.CHROMA_THREATS_COLLECTION,
-        embedding_function=embed_fn,
-        metadata={"hnsw:space": "cosine"}
-    )
+    try:
+        client = get_chroma_client()
+        embed_fn = get_embedding_function()
+        collection = client.get_or_create_collection(
+            name=config.CHROMA_THREATS_COLLECTION,
+            embedding_function=embed_fn,
+            metadata={"hnsw:space": "cosine"}
+        )
 
-    if collection.count() == 0:
-        init_threat_signatures()
+        if collection.count() == 0:
+            init_threat_signatures()
 
-    results = collection.query(
-        query_texts=[prompt],
-        n_results=1
-    )
+        results = collection.query(
+            query_texts=[prompt],
+            n_results=1
+        )
 
-    if not results or not results["distances"] or not results["distances"][0]:
+        if not results or not results["distances"] or not results["distances"][0]:
+            return False, 0.0, ""
+
+        distance = results["distances"][0][0]
+        similarity = max(0.0, 1.0 - distance)
+        matched_vector = results["documents"][0][0] if results["documents"] else ""
+
+        if similarity >= threshold:
+            return True, similarity, f"Semantic Similarity Match ({similarity:.2%}) against known attack vector: '{matched_vector[:60]}...'"
+
+        return False, similarity, ""
+    except Exception as e:
+        print(f"[Firewall] Vector threat check encountered error: {e}. Attempting self-heal...")
+        try:
+            init_threat_signatures(force_refresh=True)
+            collection = client.get_or_create_collection(
+                name=config.CHROMA_THREATS_COLLECTION,
+                embedding_function=embed_fn,
+                metadata={"hnsw:space": "cosine"}
+            )
+            results = collection.query(query_texts=[prompt], n_results=1)
+            if results and results["distances"] and results["distances"][0]:
+                distance = results["distances"][0][0]
+                similarity = max(0.0, 1.0 - distance)
+                matched_vector = results["documents"][0][0] if results["documents"] else ""
+                if similarity >= threshold:
+                    return True, similarity, f"Semantic Similarity Match ({similarity:.2%}) against known attack vector: '{matched_vector[:60]}...'"
+                return False, similarity, ""
+        except Exception as retry_err:
+            print(f"[Firewall] Self-healing vector threat check failed: {retry_err}")
         return False, 0.0, ""
-
-    distance = results["distances"][0][0]
-    similarity = max(0.0, 1.0 - distance)
-    matched_vector = results["documents"][0][0] if results["documents"] else ""
-
-    if similarity >= threshold:
-        return True, similarity, f"Semantic Similarity Match ({similarity:.2%}) against known attack vector: '{matched_vector[:60]}...'"
-
-    return False, similarity, ""
 
 
 def is_attack(prompt: str) -> Dict[str, Any]:

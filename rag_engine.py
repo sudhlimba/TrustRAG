@@ -68,24 +68,46 @@ def query_vector_store(
     """
     client = get_chroma_client()
     embed_fn = get_embedding_function()
-    collection = client.get_or_create_collection(
-        name=config.CHROMA_DOCS_COLLECTION,
-        embedding_function=embed_fn,
-        metadata={"hnsw:space": "cosine"}
-    )
+    try:
+        collection = client.get_or_create_collection(
+            name=config.CHROMA_DOCS_COLLECTION,
+            embedding_function=embed_fn,
+            metadata={"hnsw:space": "cosine"}
+        )
 
-    if collection.count() == 0:
-        return []
+        if collection.count() == 0:
+            return []
 
-    retrieved_chunks = []
-    seen_contents = set()
+        retrieved_chunks = []
+        seen_contents = set()
 
-    # 1. Strict hierarchical clearance filtering ($lte user_clearance)
-    results = collection.query(
-        query_texts=[prompt],
-        n_results=top_k,
-        where={"clearance_required": {"$lte": user_clearance}}
-    )
+        # 1. Strict hierarchical clearance filtering ($lte user_clearance)
+        results = collection.query(
+            query_texts=[prompt],
+            n_results=top_k,
+            where={"clearance_required": {"$lte": user_clearance}}
+        )
+    except Exception as e:
+        print(f"[RAG Engine] Vector search error: {e}. Triggering auto-heal...")
+        try:
+            import ingest
+            ingest.ingest_documents(force_reset=True)
+            collection = client.get_or_create_collection(
+                name=config.CHROMA_DOCS_COLLECTION,
+                embedding_function=embed_fn,
+                metadata={"hnsw:space": "cosine"}
+            )
+            results = collection.query(
+                query_texts=[prompt],
+                n_results=top_k,
+                where={"clearance_required": {"$lte": user_clearance}}
+            )
+            retrieved_chunks = []
+            seen_contents = set()
+        except Exception as retry_err:
+            print(f"[RAG Engine] Auto-heal query failed: {retry_err}")
+            return []
+
 
     if results and results["documents"] and results["documents"][0]:
         docs = results["documents"][0]

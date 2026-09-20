@@ -51,7 +51,7 @@ if "pending_chat_action" not in st.session_state:
 def bootstrap_app():
     db.init_db()
     auth.seed_default_users()
-    # Check if vector store requires automatic initial ingestion on cloud deployment
+    # Check if vector store requires automatic initial ingestion or self-healing on deployment
     try:
         client = ingest.get_chroma_client()
         embed_fn = ingest.get_embedding_function()
@@ -63,11 +63,31 @@ def bootstrap_app():
         if col.count() == 0:
             print("[Bootstrap] Empty vector collection detected. Auto-ingesting documents...")
             ingest.ingest_documents(force_reset=False)
+        else:
+            # Probe query to ensure collection embedding function is valid and working offline
+            col.query(query_texts=["healthcheck"], n_results=1)
+
+        threat_col = client.get_or_create_collection(
+            name=config.CHROMA_THREATS_COLLECTION,
+            embedding_function=embed_fn,
+            metadata={"hnsw:space": "cosine"}
+        )
+        if threat_col.count() == 0:
+            firewall.init_threat_signatures(force_refresh=False)
+        else:
+            threat_col.query(query_texts=["healthcheck"], n_results=1)
     except Exception as e:
-        print(f"[Bootstrap] Vector store check notice: {e}")
+        print(f"[Bootstrap] Incompatible or uninitialized vector collections detected: {e}. Auto-healing...")
+        try:
+            ingest.ingest_documents(force_reset=True)
+            firewall.init_threat_signatures(force_refresh=True)
+            print("[Bootstrap] Auto-healing completed successfully.")
+        except Exception as err2:
+            print(f"[Bootstrap] Auto-healing error: {err2}")
     return True
 
 bootstrap_app()
+
 
 # ==============================================================================
 # Helper Formatting Utilities

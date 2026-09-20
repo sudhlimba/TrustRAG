@@ -101,8 +101,24 @@ def _detect_action_intent(prompt: str, user: Dict[str, Any]) -> Optional[Dict[st
     )
     if del_match:
         target_user = del_match.group(1).strip()
+        # If a pronoun or generic word was matched, look for the actual subject mentioned in the prompt
+        if target_user in ["him", "her", "them", "it", "user", "account", "someone", "person", "the", "this"]:
+            # Check if any registered user is mentioned in the prompt
+            try:
+                all_u = [u["username"].lower() for u in db.get_all_users()]
+                found_u = next((u for u in all_u if u in p_lower), None)
+                if found_u:
+                    target_user = found_u
+                else:
+                    # Look for candidate name pattern like "[name] is not a part" or similar subject
+                    subj_match = re.search(r"\b([a-zA-Z0-9_\-\.]+)\s+is\s+(?:not\s+)?(?:a\s+)?(?:part|an\s+employee|in|with|working)\b", p_lower)
+                    if subj_match:
+                        target_user = subj_match.group(1).strip()
+            except Exception:
+                pass
+
         # Avoid matching words like "access", "notifications", "cache" as usernames
-        if target_user not in ["access", "notifications", "all", "the", "my", "clearance", "chat"]:
+        if target_user not in ["access", "notifications", "all", "the", "my", "clearance", "chat", "him", "her", "them"]:
             req_lvl = 4
             authorized = user_level >= req_lvl
             return {
@@ -114,6 +130,7 @@ def _detect_action_intent(prompt: str, user: Dict[str, Any]) -> Optional[Dict[st
                 "description": f"Permanently offboard user **'{target_user}'** and purge all active sessions and grants",
                 "confirmation_prompt": f"Are you sure you want to permanently delete user account **'{target_user}'** from the enterprise directory?"
             }
+
 
     # -------------------------------------------------------------
     # Action: Update Clearance / Promote Demote User (Level 4 Exec Only)
