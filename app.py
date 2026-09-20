@@ -36,40 +36,6 @@ CSS_PATH = Path(__file__).resolve().parent / "static" / "style.css"
 if CSS_PATH.exists():
     st.markdown(f"<style>{CSS_PATH.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
-# Guaranteed Sidebar Toggle Override (ensures sidebar can ALWAYS be reopened if closed)
-st.markdown("""
-<style>
-header[data-testid="stHeader"] {
-    background: transparent !important;
-    z-index: 1000 !important;
-}
-[data-testid="collapsedControl"],
-[data-testid="stSidebarCollapsedControl"],
-button[data-testid="stSidebarCollapsedControl"],
-[data-testid="stSidebarCollapseButton"] {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 999999 !important;
-    top: 0.6rem !important;
-    left: 0.6rem !important;
-    position: fixed !important;
-}
-[data-testid="collapsedControl"] button,
-button[data-testid="stSidebarCollapsedControl"] {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    background: rgba(13, 20, 36, 0.95) !important;
-    border: 1px solid #38bdf8 !important;
-    color: #38bdf8 !important;
-    border-radius: 8px !important;
-    padding: 6px !important;
-    box-shadow: 0 0 14px rgba(56, 189, 248, 0.4) !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
 # Initialize Session State
 if "authenticated_user" not in st.session_state:
     st.session_state["authenticated_user"] = None
@@ -323,28 +289,22 @@ def render_main_dashboard():
     pending_doc_reqs = db.get_pending_doc_requests(user_level) if user_level >= 3 else []
     active_grants = db.get_user_active_doc_grants(user_name)
 
-    # Top Navbar & Header Controls
-    c_nav_left, c_nav_right = st.columns([3.6, 1.4])
-    with c_nav_left:
-        st.markdown(f"""
-        <div class="top-navbar" style="margin-bottom:0; padding:12px 18px;">
-            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-                <span style="font-size:1.15rem; font-weight:800; color:#f8fafc;">👤 {user_name}</span>
+    # Top Navbar
+    st.markdown(f"""
+    <div class="top-navbar">
+        <div>
+            <div style="display:flex; align-items:center; gap:12px;">
+                <span style="font-size:1.2rem; font-weight:800; color:#f8fafc;">👤 {user_name}</span>
                 {get_clearance_badge_html(user_level)}
-                <span style="color:#64748b; font-size:0.8rem; font-weight:500;">• {user['role']}</span>
-                <span class="status-pill" style="margin-left:6px;"><span class="status-dot"></span>ACTIVE SESSION</span>
+                <span style="color:#475569; font-size:0.8rem; font-weight:500;">•  {user['role']}</span>
             </div>
         </div>
-        """, unsafe_allow_html=True)
-    with c_nav_right:
-        st.write("")
-        if st.button("🚪 Logout", key="header_logout_btn", use_container_width=True, help="Terminate current enterprise session"):
-            st.session_state["authenticated_user"] = None
-            st.session_state["messages"] = []
-            st.session_state["active_nav"] = "chat"
-            st.rerun()
-
-    st.markdown("<div style='margin-bottom: 12px;'></div>", unsafe_allow_html=True)
+        <div class="status-pill">
+            <span class="status-dot"></span>
+            ACTIVE SESSION
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     # Active JIT Access Banner
     if active_grants:
@@ -355,37 +315,6 @@ def render_main_dashboard():
                 (Level {g['document_clearance']}) — <b>{g['time_remaining_str']} remaining</b>
             </div>
             """, unsafe_allow_html=True)
-
-    # Quick Top Navigation Bar (ensures all views are instantly accessible even if sidebar is closed)
-    current_nav = st.session_state.get("active_nav", "chat")
-    unread_notifs = db.get_unread_notification_count(user_name)
-    inbox_badge = f" ({unread_notifs})" if unread_notifs > 0 else ""
-
-    top_nav_items = [
-        ("chat", "💬 Chat Assistant"),
-        ("inbox", f"📬 Inbox{inbox_badge}"),
-        ("jit_request", "🔑 Access & Grants"),
-    ]
-    if user_level >= 3:
-        d_badge = f" ({len(pending_doc_reqs)})" if pending_doc_reqs else ""
-        top_nav_items.append(("doc_approvals", f"📋 Approvals{d_badge}"))
-    if user_level == 4:
-        total_exec_pending = len(pending_user_reqs) + len(pending_escalation_reqs)
-        u_badge = f" ({total_exec_pending})" if total_exec_pending > 0 else ""
-        top_nav_items.append(("user_approvals", f"👥 Governance{u_badge}"))
-        top_nav_items.append(("audit", "📊 Telemetry"))
-    elif user_level == 2:
-        top_nav_items.append(("firewall", "🛡️ Threat Lab"))
-
-    nav_cols = st.columns(len(top_nav_items))
-    for i, (n_key, n_label) in enumerate(top_nav_items):
-        with nav_cols[i]:
-            is_active = (current_nav == n_key)
-            if st.button(n_label, key=f"topnav_{n_key}", use_container_width=True, type="primary" if is_active else "secondary"):
-                st.session_state["active_nav"] = n_key
-                st.rerun()
-
-    st.markdown("<div style='margin-bottom: 8px;'></div>", unsafe_allow_html=True)
 
     # Sidebar Navigation Menu
     with st.sidebar:
