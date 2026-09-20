@@ -1,0 +1,14 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Local Environment & Secrets
+.env
+.env.local
+
+# Operating System
+.DS_Store
+Thumbs.db
+*.log

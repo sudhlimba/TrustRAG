@@ -1,0 +1,41 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - PERFORMANCE IMPROVEMENT & SEPARATION PROTOCOL
+# Classification: LEVEL 3 (Management & HR Clearance Only - Strictly Confidential)
+# Document ID: HR-EMP-2026-031
+# Maintainer: Employee Relations & Legal People Operations
+# ==============================================================================
+
+1. PURPOSE & APPLICABILITY
+This protocol governs corrective action, formal Performance Improvement Plans (PIPs), 
+and separation agreements for underperforming employees. All processes outlined herein 
+must be conducted in close collaboration with the designated People Business Partner (PBP).
+
+2. STAGED CORRECTIVE ACTION FRAMEWORK
+- Stage 1: Written Feedback & 30-Day Informal Coaching
+  * Prior to formal PIP placement, the manager must provide specific, documented written feedback 
+    identifying deficiencies, concrete deliverables, and weekly 1:1 check-ins over a 30-day window.
+- Stage 2: Formal Performance Improvement Plan (PIP - 60 Days)
+  * If performance does not recover to 'Meets High Standards', the employee is placed on a formal 60-day PIP.
+  * The PIP document must contain SMART goals, weekly milestones, and explicit criteria for successful completion.
+  * Day 30 Checkpoint: Manager and PBP conduct a formal mid-term evaluation.
+  * Day 60 Final Determination: Successful completion restores employee to standard standing; 
+    unsuccessful completion leads to separation.
+
+3. OPTIONAL MUTUAL SEPARATION TRANSITION PACKAGE
+At the initiation of a formal PIP, employees in good behavioral standing may be offered a voluntary Mutual Separation Option 
+in lieu of entering the 60-day PIP process:
+- Standard Voluntary Transition Consideration:
+  * 6 weeks of base salary continuation.
+  * 2 months of employer-subsidized COBRA health insurance coverage.
+  * Accelerated vesting of any RSU tranches scheduled to vest within 45 days of the separation date.
+- Condition: Requires execution of a standard mutual general release and non-disparagement agreement.
+
+4. INVOLUNTARY SEPARATION & SEVERANCE SCHEDULE
+Where involuntary separation occurs following an unsuccessful PIP or organizational redundancy:
+- Severance Pay Scale:
+  * IC1 - IC3: 2 weeks of base salary per completed full year of continuous service (minimum 4 weeks, maximum 16 weeks).
+  * IC4 - IC5 & M1 - M2: 3 weeks of base salary per year of service (minimum 8 weeks, maximum 26 weeks).
+  * Vice Presidents & Executive Officers: Governed by individual executive employment agreements (minimum 26 weeks).
+- Equipment Retrieval:
+  * Company laptop and security badges must be surrendered within 24 hours of notification. 
+  * IT Service Desk initiates automated remote wipe via Jamf/InTune upon separation meeting completion.

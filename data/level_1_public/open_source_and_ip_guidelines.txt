@@ -1,0 +1,55 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - OPEN SOURCE & INTELLECTUAL PROPERTY POLICY
+# Classification: LEVEL 1 (Public / Intern & General Workforce)
+# Document ID: DOC-POL-2026-004
+# Effective Date: January 1, 2026 | Governing Body: Open Source Review Board (OSRB)
+# ==============================================================================
+
+1. POLICY PURPOSE
+Open source software is fundamental to modern software engineering. Nova Tech encourages 
+the responsible use of open-source libraries while safeguarding company intellectual property, 
+customer confidentiality, and avoiding licensing compliance litigation.
+
+2. APPROVED PERMISSIVE LICENSES (CATEGORY GREEN)
+The following licenses are pre-approved for inclusion in internal microservices, client SDKs, 
+and SaaS production builds without individual Open Source Review Board (OSRB) approval:
+- MIT License
+- Apache License 2.0 (with standard patent grant)
+- BSD 2-Clause and 3-Clause Licenses
+- ISC License
+- Python Software Foundation (PSF) License
+- Unlicense / Public Domain (CC0)
+Requirements: The original copyright header and license notice must be preserved in third-party notice manifests.
+
+3. RESTRICTED & CONDITIONALLY APPROVED LICENSES (CATEGORY YELLOW)
+The following licenses require automated dependency scanning and architectural review before merging into production:
+- Mozilla Public License 2.0 (MPL-2.0)
+- Eclipse Public License (EPL 1.0 / 2.0)
+- Common Development and Distribution License (CDDL 1.0)
+Condition: Files covered under Category Yellow licenses must remain dynamically linked and isolated as distinct modules. 
+Proprietary Nova Tech source code must never be combined into modified Category Yellow source files.
+
+4. BANNED COPYLEFT & NETWORK RECIPROCAL LICENSES (CATEGORY RED)
+The inclusion of any library licensed under the following terms in proprietary codebases is STRICTLY PROHIBITED:
+- GNU General Public License (GPL v2, GPL v3)
+- GNU Affero General Public License (AGPL v3)
+- Server Side Public License (SSPL)
+- GNU Lesser General Public License (LGPL v2.1/v3) in static linking configurations
+Rationale: Reciprocal licenses contain "copyleft" and "network copyleft" clauses that could legally compel 
+Nova Tech to publicly disclose proprietary algorithms, machine learning models, and customer backend source code. 
+Any accidental dependency containing AGPL triggers an immediate P1 security pull request blocker.
+
+5. CONTRIBUTING TO EXTERNAL OPEN SOURCE PROJECTS
+Employees wishing to contribute code, bug fixes, or new features to external open-source projects during working hours 
+or using company hardware must adhere to the following:
+- Minor Bug Fixes & Documentation: Contributions to existing upstream projects (e.g., PyTorch, Kubernetes, React) 
+  under 100 lines of code do not require pre-approval, provided they contain no proprietary algorithms.
+- Substantial Features or New Repositories: Require submission of an OSRB Ticket (osrb-review@novatech.internal). 
+  Review SLA is 5 business days.
+
+6. PROPRIETARY INVENTION ASSIGNMENT & PATENTS
+Under the Employee Inventions Agreement signed upon onboarding:
+- All patentable discoveries, models, software designs, and architectures created during employment 
+  relating to company business are the exclusive intellectual property of Nova Technologies Enterprise.
+- Employees who submit patent applications through the Legal IP Team receive a $2,500 bonus upon patent filing 
+  and an additional $5,000 bonus upon successful patent issuance by the USPTO.

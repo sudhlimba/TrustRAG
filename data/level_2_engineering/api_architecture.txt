@@ -1,0 +1,21 @@
+# NOVA TECH ENTERPRISE - ENGINEERING & API ARCHITECTURE
+Clearance Required: Level 2 (Engineering Access Only)
+
+1. SYSTEM ARCHITECTURE OVERVIEW:
+Nova Tech runs a microservices architecture hosted on AWS EKS Kubernetes clusters.
+All internal inter-service communication is secured using mutual TLS (mTLS) with Istio service mesh.
+
+2. API GATEWAYS & ENDPOINTS:
+- Production Gateway: https://api.prod.novatech.internal/v2/
+- Staging Gateway: https://api.staging.novatech.internal/v2/
+- Auth Service: https://auth.prod.novatech.internal (JWT tokens with 15-minute expiration)
+- Core Data Store: Multi-AZ PostgreSQL 15 clusters with read-replicas for analytics.
+
+3. CODE STANDARDS & DEPLOYMENT:
+- All code must pass SonarQube static analysis with >80% test coverage before PR merge.
+- CI/CD pipelines run on GitHub Actions.
+- Docker containers must be scanned using Trivy for CVE vulnerabilities prior to registry push.
+
+4. DATABASE CONNECTION GUIDELINES:
+- Applications must use connection pooling via PgBouncer (max pool size 50 per pod).
+- Direct SSH tunneling into production databases is strictly prohibited; all schema migrations must run through Flyway scripts.

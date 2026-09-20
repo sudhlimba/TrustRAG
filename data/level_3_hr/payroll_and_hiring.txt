@@ -1,0 +1,18 @@
+# NOVA TECH ENTERPRISE - HR COMPENSATION & PAYROLL BANDS
+Clearance Required: Level 3 (HR & Management Clearance Only)
+RESTRICTED CONFIDENTIAL - DO NOT DISTRIBUTE OUTSIDE HR/MANAGEMENT
+
+1. ANNUAL SALARY BANDS (FY 2026):
+- Level 1 (Interns / Apprentices): $50,000 - $65,000 annual stipend + transit pass.
+- Level 2 (Software Engineers / Systems Analysts): $120,000 - $165,000 base + 15% target bonus.
+- Level 3 (Engineering Managers / Senior HR / Staff): $180,000 - $230,000 base + 25% target bonus + stock grants.
+- Level 4 (VP / C-Suite Executives): $320,000 - $480,000 base + 50% target bonus + executive equity plan.
+
+2. PERFORMANCE REVIEW & BONUS DISTRIBUTION:
+- Bi-annual reviews take place in June and December.
+- Top performers (Rating 5/5) receive a 125% bonus multiplier and fast-track promotion eligibility.
+- Underperforming employees (Rating 1-2) are enrolled in a 60-day Performance Improvement Plan (PIP).
+
+3. HIRING & HEADCOUNT TARGETS:
+- Plan to hire 45 new backend engineers and 12 machine learning researchers in Q3/Q4.
+- Department budget allocations: Engineering ($14.2M), Marketing ($4.1M), Operations ($3.8M).

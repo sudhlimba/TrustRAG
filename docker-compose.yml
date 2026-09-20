@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  trustrag-db:
+    image: postgres:15-alpine
+    container_name: trustrag-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: trustrag
+      POSTGRES_PASSWORD: trustrag_secure_pass
+      POSTGRES_DB: trustrag_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trustrag -d trustrag_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  trustrag-app:
+    build: .
+    container_name: trustrag-defense-suite
+    restart: unless-stopped
+    depends_on:
+      trustrag-db:
+        condition: service_healthy
+    environment:
+      - DB_TYPE=postgres
+      - DATABASE_URL=postgresql://trustrag:trustrag_secure_pass@trustrag-db:5432/trustrag_db
+      - LLM_PROVIDER=openai
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - CHROMA_PERSIST_DIR=/app/data/chroma_db
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./static:/app/static
+
+volumes:
+  postgres_data:
+    driver: local

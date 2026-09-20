@@ -1,0 +1,43 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - BOARD OF DIRECTORS QUARTERLY MEETING MINUTES (Q3 FY 2026)
+# Classification: LEVEL 4 (Executive & Board Clearance Only - Material Non-Public Information)
+# Document ID: BOD-MIN-2026-Q3-04
+# Date of Meeting: September 12, 2026 | Location: Corporate HQ, Executive Boardroom 400
+# Attendees: David Vance (CEO/Chairman), Elena Rostova (VP People Ops), Arthur Pendelton (Audit Chair), 
+# Sarah Lin (Sequoia Capital), Robert Sterling (Benchmark), Michael Ross (General Counsel/Secretary)
+# ==============================================================================
+
+1. CALL TO ORDER & APPROVAL OF PRIOR MINUTES
+The meeting was formally called to order at 09:30 AM by Chairman David Vance. 
+The minutes of the previous quarterly meeting held on June 18, 2026, were unanimously approved without amendment.
+
+2. FINANCIAL PERFORMANCE REVIEW & RUNWAY ANALYSIS
+CFO and VP of Finance presented the financial report for the close of Q3:
+- Current Cash & Cash Equivalents: $48,620,000 held across tier-1 treasury accounts (Morgan Stanley, Silicon Valley Bank).
+- Net Monthly Cash Burn: Averaged $1,820,000/month over the preceding 3 months, reflecting disciplined R&D scaling.
+- Cash Runway Projection: 26.7 months of runway remaining at current burn trajectory without requiring external debt facilities.
+- Revenue Performance:
+  * Q3 Recognized ARR: $41,400,000 (representing 46% YoY top-line growth).
+  * Net Revenue Retention (NRR): 128%, driven by expansion within Fortune 500 enterprise accounts.
+  * Gross Margin: Maintained at 81.2% after optimizing cloud compute node pools.
+
+3. SERIES D FINANCING STRATEGY & VALUATION TARGETS
+The Board discussed preliminary outreach from crossover growth equity investors regarding a planned Series D financing:
+- Timing: Formal investor roadshow slated for Q1 2027.
+- Target Capital Raise: $80,000,000 to $100,000,000 in primary growth capital.
+- Target Pre-Money Valuation: $850,000,000 (supported by 20.5x ARR multiple on projected FY26 exit run-rate).
+- Syndicate Formation: Lead investment interest registered from existing board partners (Sequoia & Benchmark) 
+  with allocation reserved for a sovereign wealth fund co-investor.
+
+4. LITIGATION UPDATE & PATENT DEFENSE CONTINGENCY
+General Counsel Michael Ross briefed the Board on the ongoing patent infringement dispute filed by Sentinel Systems, LLC:
+- Summary: Sentinel claims Nova Tech's zero-trust hierarchical vector query engine infringes US Patent No. 10,842,119.
+- Legal Assessment: Outside counsel (Kirkland & Ellis) assesses probability of adverse judgment at less than 15%, 
+  citing substantial prior art in Apache Lucene and Milvus metadata filtering algorithms.
+- Reserve Allocation: The Board unanimously approved establishing a $4,500,000 litigation defense and potential settlement reserve.
+
+5. EXECUTIVE SESSION & RETENTION MATTERS
+Non-management directors met in executive session:
+- Approved the FY26 executive bonus pool allocation at 112% of target based on strong Enterprise SaaS revenue beats.
+- Confirmed approval for the Project Titan acquisition term sheet for Aegis Data Labs at $145,000,000, 
+  authorizing CEO David Vance to execute binding documentation.

@@ -1,0 +1,73 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - SEV-1 / SEV-0 INCIDENT RESPONSE & DISASTER RECOVERY RUNBOOK
+# Classification: LEVEL 2 (Engineering Clearance Only - Internal Technical Confidential)
+# Document ID: ENG-OPS-2026-019
+# Maintainer: Site Reliability Engineering (SRE) & Incident Response Team
+# ==============================================================================
+
+1. SEVERITY LEVEL CLASSIFICATION MATRIX
+- SEV-0 (Catastrophic Outage):
+  * Definition: Total production outage affecting 100% of customers, active data breach/ransomware, or complete failure of primary AWS region.
+  * SLA: 5-minute initial triage response | 15-minute executive stakeholder escalation.
+- SEV-1 (Critical Degradation):
+  * Definition: Core functionality unavailable for >10% of customers, API error rate >5% for 5 consecutive minutes, or loss of database primary writer node.
+  * SLA: 10-minute initial triage response | 30-minute status update cadence to status.novatech.io.
+- SEV-2 (Major Impact / Workaround Available):
+  * Definition: Partial feature impairment, non-blocking asynchronous pipeline delays.
+  * SLA: 30-minute initial response | 2-hour status update cadence.
+- SEV-3 (Minor Bug / Administrative):
+  * Standard business hours handling via Jira backlog.
+
+2. EMERGENCY INCIDENT COMMANDER (IC) WORKFLOW
+Upon receiving a PagerDuty escalation for SEV-0 / SEV-1:
+Step 1 - Declare Incident:
+  Execute command in Slack: `/incident start "SEV-1: [Brief Description]"`
+  This automatically provisions:
+  - Private incident channel `#inc-2026-xxxx`
+  - Live Zoom War Room audio/video bridge
+  - Google Docs real-time incident timeline document
+Step 2 - Assign Roles:
+  - Incident Commander (IC): Leads the war room, controls decision flow, assigns investigation threads.
+  - Operations Lead: Executes system commands, inspects logs, applies rollback scripts.
+  - Communications Lead: Drafts customer-facing incident updates for statuspage and internal executive briefings.
+Step 3 - Mute Noise:
+  All non-essential team members must remain on mute in the war room to eliminate coordination chaos.
+
+3. COMMON TRIAGE PATHWAYS & RUNBOOKS
+- Pathway A: Database Deadlock & Connection Pool Exhaustion (PgBouncer)
+  Symptoms: HTTP 504 Gateway Timeouts, Aurora Postgres CPU spikes to 100%, PgBouncer active client queue >500.
+  Diagnostic Commands:
+    SELECT pid, now() - query_start AS duration, query, state 
+    FROM pg_stat_activity 
+    WHERE state != 'idle' AND (now() - query_start) > interval '30 seconds' 
+    ORDER BY duration DESC;
+  Remediation:
+    Terminate blocked long-running analytical queries:
+    SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE duration > interval '2 minutes';
+    If pool does not recover: Scale PgBouncer deployment from 5 to 15 replicas via kubectl:
+    `kubectl scale deployment pgbouncer-prod -n databases --replicas=15`
+
+- Pathway B: Kubernetes Pod OOMKilled Cascading Loop
+  Symptoms: Kubernetes crashlooping across critical backend pods, memory usage exceeding 95% limits.
+  Remediation:
+    Temporarily lift memory limits via Helm emergency override:
+    `helm upgrade --reuse-values --set backend.resources.limits.memory=8Gi backend-prod ./helm/backend`
+    Inspect thread dumps to identify memory leaks in JVM or PyTorch workers.
+
+4. AUTOMATED REGIONAL DISASTER RECOVERY FAILOVER (us-east-1 -> us-west-2)
+In the event of an unrecoverable AWS us-east-1 regional infrastructure failure:
+- Authority: Triggering regional failover requires mutual sign-off between Incident Commander and Engineering VP.
+- Execution Steps:
+  1. Promote Aurora Global Database secondary cluster in us-west-2:
+     `aws rds failover-global-cluster --global-cluster-identifier nova-prod-global --target-db-cluster-identifier nova-prod-aurora-west`
+  2. Switch Route53 DNS latency records to weight us-west-2 at 100% and us-east-1 at 0%:
+     `terraform apply -target=module.dns_failover -var="active_region=us-west-2" -auto-approve`
+  3. Verify Ingress traffic flow via Datadog live network maps.
+- Recovery Objectives:
+  * Recovery Time Objective (RTO): 18 minutes.
+  * Recovery Point Objective (RPO): < 5 seconds of committed transaction data loss.
+
+5. POST-MORTEM REQUIREMENTS (BLAMELESS POST-MORTEM)
+- Post-Mortem timeline document must be published within 48 hours of incident resolution.
+- Mandatory sections: Root Cause Analysis (5 Whys methodology), Action Items with assigned owners, Preventive Guardrails.
+- Action items are tracked as P0 engineering tickets and must be resolved within 14 calendar days.

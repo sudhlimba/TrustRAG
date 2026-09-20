@@ -1,0 +1,44 @@
+# ==============================================================================
+# PROJECT TITAN: STRICTLY CONFIDENTIAL BINDING ACQUISITION TERM SHEET
+# Classification: LEVEL 4 (Executive & Board Clearance Only - Material Non-Public Information)
+# Document ID: EXEC-MNA-2026-TITAN-009
+# Target Entity: Aegis Data Labs, Inc. (Delaware Corporation)
+# Acquiring Entity: Nova Technologies Enterprise, Inc.
+# Governing Law: State of Delaware | SEC Filing Status: RESTRICTED INSIDER TRADING PROHIBITED
+# ==============================================================================
+
+1. TRANSACTION OVERVIEW & VALUATION
+This Term Sheet outlines the primary terms pursuant to which Nova Technologies Enterprise, Inc. 
+("Acquirer") will acquire 100% of the issued and outstanding capital stock and voting equity 
+of Aegis Data Labs, Inc. ("Target").
+
+- Aggregate Purchase Price: $145,000,000 (One Hundred Forty-Five Million US Dollars) on a cash-free, debt-free basis.
+- Consideration Breakdown:
+  * Cash Consideration: $95,000,000 payable at Closing via wire transfer of immediately available funds.
+  * Equity Consideration: $50,000,000 issued in unregistered shares of Nova Technologies Class A Common Stock, 
+    valued at the volume-weighted average price (VWAP) over the 20 consecutive trading days preceding the Definitive Agreement.
+  * Working Capital Adjustment: Target must deliver a Normalized Net Working Capital of not less than $4,200,000 at Closing.
+
+2. INDEMNITY ESCROW & EARNOUT PROVISIONS
+- Indemnification Escrow:
+  * Amount: $14,500,000 (10% of Total Purchase Price) withheld at Closing and deposited into a third-party escrow account (J.P. Morgan Chase).
+  * Release Schedule: 50% released after 12 months; remainder released after 18 months, less any pending indemnification claims for breach of representations or warranties.
+- Performance Earnout:
+  * Additional potential earnout consideration of up to $25,000,000 tied to Aegis Data Labs achieving $28,000,000 in Annualized Recurring Revenue (ARR) 
+    within 18 months of Closing with gross margins >= 78%.
+
+3. KEY PERSONNEL RETENTION & EXECUTIVE RETENTION POOL
+- Retention Pool Allocation: $12,500,000 in time-based Restricted Stock Units (RSUs) allocated to critical engineering and scientific staff.
+- Key Founder Lockup:
+  * Dr. Marcus Vance (Chief Executive Officer) and Dr. Priya Sharma (Chief Technology Officer) must execute 3-year Non-Compete Agreements 
+    and continue full-time employment for a minimum of 24 months post-acquisition.
+  * Founder Stock Vesting: 50% of founder equity consideration subject to 24-month reverse vesting schedule (the "Golden Handcuffs").
+
+4. REGULATORY APPROVALS & CLOSING CONDITIONS
+- Hart-Scott-Rodino (HSR) Antitrust Clearance:
+  * Transaction is subject to mandatory pre-merger notification and expiration of the statutory waiting period under the HSR Act (FTC/DOJ).
+- Reverse Breakup Fee:
+  * If Acquirer terminates the agreement due to failure to secure board quorum or financing, Acquirer pays Target a $6,250,000 breakup fee.
+- Exclusivity Period (No-Shop Clause):
+  * Target agrees to a 45-day period of exclusive negotiations expiring on November 15, 2026. Target shall not solicit, encourage, or engage in any discussions 
+    concerning any alternative acquisition proposal.

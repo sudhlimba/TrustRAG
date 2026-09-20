@@ -1,0 +1,49 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - Q3/Q4 HEADCOUNT BUDGET & TALENT ACQUISITION PLAN
+# Classification: LEVEL 3 (Management & HR Clearance Only - Strictly Confidential)
+# Document ID: HR-REC-2026-077
+# Authority: Financial Planning & Analysis (FP&A) and Talent Acquisition Leadership
+# ==============================================================================
+
+1. EXECUTIVE SUMMARY & HEADCOUNT TARGETS
+For Fiscal Year 2026 Q3 and Q4, Nova Tech has allocated an annualized new hire payroll budget of $18,400,000. 
+The organization plans to expand the overall headcount by 74 net new full-time employees (FTEs) 
+across our product, engineering, security, and go-to-market divisions.
+
+2. DEPARTMENTAL HEADCOUNT ALLOCATION & REQUISITIONS
+- Engineering & AI Infrastructure (Total Requisitions: 42 FTEs | Allocated Budget: $10,800,000)
+  * Distributed Systems / Backend Engineers (Go / Python): 16 positions (Target level: IC3-IC4)
+  * Machine Learning & Vector Inference Researchers: 8 positions (Target level: IC4-IC5)
+  * Platform & SRE Engineers (Kubernetes / Terraform): 8 positions (Target level: IC3-IC4)
+  * Security Operations Engineers (SOC / Penetration Testing): 6 positions (Target level: IC3)
+  * Engineering Managers: 4 positions (Target level: M1)
+
+- Product, UX & Design (Total Requisitions: 8 FTEs | Allocated Budget: $1,950,000)
+  * Principal Technical Product Managers (AI Platforms): 3 positions
+  * Senior Product Designers (Design Systems): 3 positions
+  * Technical Writers & Developer Advocates: 2 positions
+
+- Enterprise Sales & Customer Success (Total Requisitions: 18 FTEs | Allocated Budget: $4,250,000)
+  * Strategic Enterprise Account Executives (Quota: $1.8M ARR): 8 positions
+  * Solutions Architects (Pre-Sales Technical): 6 positions
+  * Strategic Customer Success Managers: 4 positions
+
+- People Operations & Finance (Total Requisitions: 6 FTEs | Allocated Budget: $1,400,000)
+  * Senior Technical Recruiters (Contract-to-Hire): 3 positions
+  * Senior Compensation Analyst: 1 position
+  * Corporate Counsel (Commercial Contracts): 2 positions
+
+3. RECRUITING VENDOR FEES & AGENCY CAPS
+- Agency Contingency Fees: Capped at a maximum of 18% of first-year base salary (reduced from prior 22% cap).
+- Preferred Search Firms:
+  * Riviera Partners (VP and Director searches only; requires VP of People sign-off).
+  * True Search (Senior ML research roles).
+  * Contingency recruiting agencies require Level 3 Director pre-approval prior to candidate presentation.
+
+4. RELOCATION & SIGN-ON BONUSES
+- Domestic Relocation Package: Standard tier is $15,000 lump sum for IC3-IC4, and $30,000 executive tier for M2+.
+- Sign-On Bonus Guidelines:
+  * Maximum discretionary sign-on bonus for IC3 is $15,000.
+  * Maximum discretionary sign-on bonus for IC4/IC5 is $35,000.
+  * Any sign-on bonus exceeding $50,000 requires Level 4 Executive Officer approval.
+  * Clawback Clause: 100% repayable if employee departs voluntarily within 12 months; 50% repayable between months 13-24.

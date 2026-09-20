@@ -1,0 +1,72 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - GLOBAL EMPLOYEE HANDBOOK (FY 2026)
+# Classification: LEVEL 1 (Public / All Employees & Interns)
+# Document ID: DOC-POL-2026-001
+# Effective Date: January 1, 2026 | Last Reviewed: Compliance & People Operations
+# ==============================================================================
+
+1. INTRODUCTION & ZERO-TRUST WORKPLACE CULTURE
+Welcome to Nova Technologies Enterprise. Our operating model combines high autonomy 
+with strict information security. Every team member—regardless of role, seniority, 
+or employment status—is a guardian of customer trust and proprietary assets. 
+This handbook outlines general workplace standards, hybrid operating policies, 
+benefits, and operational workflows.
+
+2. WORKING HOURS, HYBRID ELIGIBILITY & REMOTE STIPENDS
+- Core Operating Hours: 09:00 to 17:00 local time, Monday through Friday. 
+  Flexible core collaboration hours are 10:00 to 15:00.
+- Hybrid Work Schedule:
+  * Full-time employees and interns are eligible for a 3/2 hybrid model (up to 2 days remote per week) 
+    subject to manager approval and attendance on designated collaboration days (Tuesdays & Thursdays).
+  * 100% remote roles require formal People Operations and Department VP approval.
+- Home Office Setup Allowance:
+  * All full-time employees and paid interns receive a one-time, non-taxable $1,000 ergonomic equipment stipend.
+  * Reimbursable items include monitors, ergonomic chairs, motorized standing desks, and noise-canceling headsets.
+  * A monthly $75 broadband and mobile phone subsidy is automatically credited through payroll.
+
+3. TRAVEL & EXPENSE REIMBURSEMENT STANDARDS
+All business-related expenses must be submitted via the Navan/Expensify portal within 30 days of occurrence:
+- Air Travel: Economy class is mandatory for domestic flights under 5 hours. Business class is permitted 
+  for international flights exceeding 7 consecutive flight hours with Department Director pre-approval.
+- Lodging: Standard hotel cap is $250/night for tier-2 cities and $350/night for high-cost metropolitan areas 
+  (e.g., San Francisco, New York, London, Tokyo).
+- Daily Meals (Per Diem): Daily aggregate allowance is $90/day ($20 breakfast, $30 lunch, $40 dinner). 
+  Itemized receipts are required for any single expense exceeding $25.
+- Client Entertainment: Pre-approval from a Level 3 Manager is required for dining with external clients exceeding $150 per person.
+
+4. PAID TIME OFF (PTO), HOLIDAYS & LEAVE OF ABSENCE
+- Standard PTO:
+  * Full-Time Employees: Accrue 20 days of Paid Time Off annually, with up to 5 carryover days into the subsequent calendar year.
+  * Interns & Apprentices: Accrue 1.5 paid PTO days per month of internship service.
+- Corporate Holidays:
+  * 11 federal holidays observed annually.
+  * Annual Winter Shutdown: All corporate offices close from December 24 through January 1. This period is fully paid and does not deduct from accrued PTO.
+- Parental & Caregiver Leave:
+  * 16 weeks of 100% paid parental leave for all birthing and non-birthing parents following birth, adoption, or foster placement.
+  * 4 weeks of paid family caregiver leave for the serious medical condition of an immediate family member.
+
+5. CAMPUS AMENITIES, BADGING & OFFICE PROTOCOLS
+- Physical Campus Badging:
+  * Access cards must be visibly displayed on corporate lanyards at all times within campus perimeter.
+  * Tailgating (allowing unbadged individuals to follow through access doors) is a security policy violation.
+  * Lost badges must be reported to Campus Security immediately via security-ops@novatech.internal.
+- Dining & Cafeterias:
+  * Main Dining Hall (Building B, Floor 2) operates from 07:30 to 14:30 daily. Lunch is provided complimentary to all badged personnel from 11:30 to 14:00.
+  * Micro-kitchens on all floors are stocked 24/7 with healthy snacks, espresso, and sparkling beverages.
+- Wellness Facilities:
+  * On-site gym, yoga studios, and quiet meditation rooms are accessible from 06:00 to 21:00 with active employee badges.
+
+6. IT SUPPORT, HARDWARE STANDARDS & HELP DESK SLA
+- Corporate Hardware Allocation:
+  * Engineering & Technical: 16-inch Apple MacBook Pro M3 Max (36GB RAM) or Lenovo ThinkPad P1 Gen 6 (Linux/Ubuntu 24.04).
+  * General Business: 14-inch Apple MacBook Pro M3 Pro or Dell XPS 15.
+- IT Service Desk Hours:
+  * 24/7 coverage for critical operational blockers.
+  * Walk-up Genius Bar: Building A, Room 104 (08:30 to 17:30 Monday through Friday).
+  * Help Desk Email: helpdesk@novatech.internal | Slack: #helpdesk-support.
+- Service Level Agreements (SLA):
+  * Sev-1 (Hardware crash / Locked out): 15-minute response, replacement loaner provided within 2 hours.
+  * Sev-2 (Software license / VPN issue): 4-hour resolution window.
+  * Sev-3 (General hardware request): 2-business-day turnaround.
+- Public Wi-Fi:
+  * Guests may join 'NovaTech-Guest'. Network credentials rotate on the 1st of every month and are displayed on reception digital displays.

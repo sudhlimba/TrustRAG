@@ -1,0 +1,78 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - GLOBAL COMPENSATION, SALARY BANDS & EQUITY MATRIX
+# Classification: LEVEL 3 (Management & HR Clearance Only - Strictly Confidential)
+# Document ID: HR-COMP-2026-114
+# Authority: Compensation Committee & Senior Vice President of People Operations
+# WARNING: Unauthorized disclosure, distribution, or retention outside authorized management is cause for immediate termination.
+# ==============================================================================
+
+1. COMPENSATION PHILOSOPHY & MARKET POSITIONING
+Nova Technologies targets the 75th percentile of the Radford Global Technology Compensation Survey 
+for base salaries and the 85th percentile for total target compensation (Cash + Annual Bonus + Equity). 
+Compensation reviews occur bi-annually in June and December.
+
+2. ENGINEERING & TECHNICAL JOB FAMILY SALARY BANDS (FY 2026)
+Amounts reflect base salary in USD for US Tier-1 locations (SF, NYC, Seattle). 
+Tier-2 locations (Austin, Denver, Chicago) receive a 0.90 geographic differential. 
+Tier-3 locations receive a 0.82 geographic differential.
+
+- IC1 (Associate Engineer / Technical Intern):
+  * Base Salary Range: $65,000 - $85,000 (or $35.00 - $45.00/hr for interns)
+  * Target Annual Bonus: N/A (Discretionary completion bonus up to $5,000)
+  * Annual Equity Grant (RSU): $10,000 target value
+
+- IC2 (Software Engineer / Infrastructure Engineer):
+  * Base Salary Range: $125,000 - $160,000
+  * Target Annual Bonus: 10% of base
+  * Annual Equity Grant (RSU): $35,000 target value (4-year vest)
+
+- IC3 (Senior Software Engineer / Senior Data Scientist):
+  * Base Salary Range: $165,000 - $210,000
+  * Target Annual Bonus: 15% of base
+  * Annual Equity Grant (RSU): $75,000 target value (4-year vest)
+
+- IC4 (Staff Software Engineer / Lead ML Researcher):
+  * Base Salary Range: $215,000 - $270,000
+  * Target Annual Bonus: 20% of base
+  * Annual Equity Grant (RSU): $130,000 target value (4-year vest)
+
+- IC5 (Principal Systems Architect / Distinguished Scientist):
+  * Base Salary Range: $275,000 - $350,000
+  * Target Annual Bonus: 25% of base
+  * Annual Equity Grant (RSU): $220,000 target value (4-year vest)
+
+3. MANAGEMENT & LEADERSHIP JOB FAMILY SALARY BANDS
+- M1 (Engineering Manager / HR Operations Manager):
+  * Base Salary Range: $195,000 - $245,000
+  * Target Annual Bonus: 20% of base
+  * Annual Equity Grant (RSU): $90,000 target value
+
+- M2 (Director of Engineering / Senior Director of People Ops):
+  * Base Salary Range: $255,000 - $320,000
+  * Target Annual Bonus: 30% of base
+  * Annual Equity Grant (RSU): $160,000 target value
+
+- Executive Tier (VP & C-Suite Officers - Requires Level 4 Approval):
+  * Base Salary Range: $350,000 - $480,000
+  * Target Annual Bonus: 50% of base
+  * Executive Carve-Out Pool: Custom board-negotiated stock option and RSU packages.
+
+4. RESTRICTED STOCK UNIT (RSU) VESTING SCHEDULES
+- Standard 4-Year Vesting Schedule:
+  * 25% of total grant vests on the 1-year anniversary of the Vesting Commencement Date (the "One-Year Cliff").
+  * The remaining 75% vests in equal quarterly installments over the subsequent 36 months (6.25% per quarter).
+- Acceleration Clauses:
+  * Double-Trigger Acceleration applies upon a Change of Control (acquisition) if an executive is terminated without cause within 12 months.
+
+5. PERFORMANCE MULTIPLIERS (BI-ANNUAL REVIEW)
+Annual corporate performance and individual ratings dictate the final bonus payout:
+- Rating 5 (Significantly Exceeds Expectations - Top 10% Bell Curve):
+  * Bonus Multiplier: 130% to 150% of target payout. Fast-track promotion eligibility.
+- Rating 4 (Exceeds Expectations - Next 25%):
+  * Bonus Multiplier: 110% to 125% of target payout.
+- Rating 3 (Meets High Standards - Middle 50%):
+  * Bonus Multiplier: 100% of target payout.
+- Rating 2 (Partially Meets - Bottom 10%):
+  * Bonus Multiplier: 50% of target payout. Mandatory 60-day coaching plan.
+- Rating 1 (Unsatisfactory - Bottom 5%):
+  * Bonus Multiplier: 0%. Immediate Performance Improvement Plan (PIP) or separation.

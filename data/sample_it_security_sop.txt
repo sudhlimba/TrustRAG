@@ -1,0 +1,15 @@
+# NOVA TECH - IT SECURITY INCIDENT RESPONSE SOP
+Clearance: Level 2 / Level 3 (Internal Engineering & Security Staff)
+
+1. INCIDENT SEVERITY CLASSIFICATION:
+- SEV-1 (Critical): Active data exfiltration, ransomware, or compromise of production database clusters. Response SLA: 15 minutes.
+- SEV-2 (High): Unauthorized privilege escalation attempt or detected prompt injection against internal LLM gateways. Response SLA: 1 hour.
+- SEV-3 (Medium): Phishing emails reported or non-critical endpoint virus detection. Response SLA: 4 hours.
+
+2. CONTAINMENT ACTIONS:
+- For SEV-1 incidents, immediately isolate affected Kubernetes pods and revoke IAM temporary session tokens.
+- For prompt injection anomalies, export firewall telemetry logs from PostgreSQL and block originating IP subnet.
+
+3. ESCALATION DIRECTORY:
+- SecOps Emergency Hotline: Ext. 4499
+- Chief Information Security Officer (CISO): ciso-escalations@novatech.internal

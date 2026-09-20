@@ -1,0 +1,52 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - CLOUD INFRASTRUCTURE & ARCHITECTURE SPECIFICATION
+# Classification: LEVEL 2 (Engineering Clearance Only - Internal Technical Confidential)
+# Document ID: ENG-ARCH-2026-088
+# Author: Principal Systems Architect (Alice Chen) | Approved: Platform Engineering Committee
+# ==============================================================================
+
+1. SYSTEM ARCHITECTURE & TOPOLOGY
+Nova Tech's core enterprise SaaS platform is architected as a distributed, high-availability 
+microservices ecosystem deployed across Amazon Web Services (AWS) with automated cross-region replication.
+
+- Primary Operating Region: AWS us-east-1 (N. Virginia) across 3 Availability Zones (AZ-a, AZ-b, AZ-c).
+- Secondary Disaster Recovery Region: AWS us-west-2 (Oregon) operating in warm standby.
+- Transit Gateway Architecture:
+  * Production VPC CIDR: 10.100.0.0/16
+  * Staging VPC CIDR: 10.101.0.0/16
+  * Management & Data Science VPC CIDR: 10.102.0.0/16
+  * VPC Peering: Controlled via AWS Transit Gateway with stateful Network Firewall inspection on all cross-VPC traffic.
+
+2. CONTAINER ORCHESTRATION & KUBERNETES DEPLOYMENT
+- Production Kubernetes (AWS EKS v1.29):
+  * Compute Node Pools: Managed Node Groups running AWS Graviton3 c7g.4xlarge instances for general microservices.
+  * Vector Inference & ML Node Pools: Dedicated Karpenter-provisioned g5.2xlarge instances with NVIDIA A10G GPUs.
+- Service Mesh:
+  * Istio Service Mesh v1.21 deployed across all application namespaces.
+  * Mutual TLS (mTLS) is enforced in 'STRICT' mode; plaintext HTTP/1.1 traffic within the cluster is rejected.
+  * Envoy sidecar proxies automatically rotate cryptographic certificates every 24 hours via HashiCorp Vault SPIFFE/SPIRE integrations.
+
+3. PERSISTENCE & DATA STORAGE ARCHITECTURE
+- Core Transactional Relational Database:
+  * Multi-AZ AWS Aurora PostgreSQL 15.5 cluster (db.r6g.8xlarge).
+  * Storage: Distributed storage with automated continuous backup to Amazon S3 (point-in-time recovery to within 1 second for 35 days).
+  * Read Scalability: 3 read replicas with Aurora auto-scaling triggered when CPU exceeds 65% or replica lag exceeds 80ms.
+  * Connection Pooling: Dedicated PgBouncer pods deployed per namespace (maximum connection pool size: 60 per pod).
+- In-Memory Caching & Session Store:
+  * AWS ElastiCache for Redis 7.1 cluster running in cluster mode enabled across 3 shards with automated failover.
+  * Eviction Policy: volatile-lru with 1-hour TTL on session tokens and 24-hour TTL on cached vector metadata.
+- Streaming Event Bus:
+  * Managed Apache Kafka (Amazon MSK) 3-broker cluster handling 150,000 events/sec.
+  * Retention Policy: Compacted topics for account governance; 7-day retention for audit and telemetry logs.
+
+4. OBSERVABILITY, APM & METRICS TELEMETRY
+- Metrics & Dashboards: Datadog Agent v7.50 daemonsets deployed to every EKS node collecting system metrics, OOM events, and CPU throttling.
+- Distributed Tracing: OpenTelemetry (OTel) collectors inject traceparent headers across HTTP/gRPC boundaries.
+- Log Aggregation:
+  * FluentBit sidecars forward sanitized application logs to Amazon OpenSearch Service.
+  * Masking Engine: FluentBit regex filters automatically redact credit card numbers (PAN), Bearer tokens, and AWS access keys before transmission.
+
+5. SECURITY ENCLAVES & NETWORK FIREWALL RULES
+- Ingress: AWS CloudFront CDN -> AWS WAF (Web Application Firewall with managed Core Rule Set, SQLi rule set, and Rate-Limiting rules) -> AWS Network Load Balancer -> Istio Ingress Gateway.
+- Direct database connection from external public subnets is physically impossible (databases live in private isolated subnets with no Internet Gateway route).
+- Bastion Host Access: SSH access is strictly disabled. Emergency database queries require AWS Systems Manager (SSM) Session Manager sessions authorized via Okta Duo MFA with full session screen recording.

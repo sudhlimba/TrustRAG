@@ -1,0 +1,46 @@
+# ==============================================================================
+# NOVA TECHNOLOGIES ENTERPRISE - INTERNAL API SECURITY & OAUTH 2.1 SPECIFICATION
+# Classification: LEVEL 2 (Engineering Clearance Only - Internal Technical Confidential)
+# Document ID: ENG-SEC-2026-042
+# Maintainer: Application Security & Cryptography Engineering Team
+# ==============================================================================
+
+1. AUTHENTICATION ARCHITECTURE OVERVIEW
+Nova Tech enforces zero-trust identity verification across all application boundaries. 
+Static API keys, long-lived bearer tokens, and IP-whitelisting as sole authentication 
+mechanisms are strictly deprecated across all internal and public services.
+
+2. OAUTH 2.1 & OIDC TOKEN LIFECYCLE
+- External Client & Web Application Authentication:
+  * Authorization Code Flow with PKCE (Proof Key for Code Exchange) using SHA-256 code verifier is mandatory.
+  * Implicit Grant and Resource Owner Password Credentials (ROPC) flows are disabled at the API Gateway.
+- Token Specifications:
+  * Access Tokens: Cryptographically signed RS256 / Ed25519 JSON Web Tokens (JWT).
+  * Expiration Window: Access tokens expire after exactly 15 minutes (900 seconds).
+  * Refresh Tokens: Stored in HTTP-only, Secure, SameSite=Strict cookies with single-use rotation enabled.
+  * Token Invalidation: Immediate blacklisting supported via distributed Redis Bloom filters.
+
+3. SERVICE-TO-SERVICE (M2M) COMMUNICATION
+- Microservices communicating internally must authenticate using OAuth 2.0 Client Credentials 
+  combined with mutual TLS (mTLS) client certificates.
+- Dynamic Secret Injection:
+  * Applications must never hardcode database credentials, third-party API keys, or JWT signing keys in code or git repositories.
+  * Credentials must be dynamically fetched from HashiCorp Vault using Kubernetes Service Account tokens (Vault Agent Injector).
+  * Vault rotates database credentials every 4 hours automatically.
+
+4. RATE LIMITING & ABUSE PREVENTION THRESHOLDS
+The Cloudflare / Envoy API Gateway applies token-bucket rate limiting per client IP and authenticated user ID:
+- Public Unauthenticated Endpoints (e.g. `/v2/login`, `/v2/register`):
+  * Maximum: 5 requests per minute per IP. Exceeding triggers a 15-minute IP cooling period.
+- Standard Authenticated Endpoints:
+  * Maximum: 100 requests per minute per user ID.
+- Machine Learning & Vector Inference Endpoints (e.g. `/v2/rag/query`):
+  * Maximum: 10 requests per minute per user.
+  * Sustained burst allowance: 15 requests over a 30-second window before HTTP 429 Too Many Requests is returned.
+
+5. CRYPTOGRAPHIC DATA-AT-REST & IN-TRANSIT STANDARDS
+- In-Transit: TLS 1.3 is mandatory. TLS 1.0, 1.1, and 1.2 are rejected by public load balancers.
+- At-Rest Encryption:
+  * All database tables, S3 buckets, and ChromaDB vector persistence directories are encrypted with AWS KMS 
+    customer-managed encryption keys (CMEK) using AES-256-GCM.
+  * Keys are rotated automatically on a 365-day schedule.
