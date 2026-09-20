@@ -36,6 +36,40 @@ CSS_PATH = Path(__file__).resolve().parent / "static" / "style.css"
 if CSS_PATH.exists():
     st.markdown(f"<style>{CSS_PATH.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
+# Guaranteed Sidebar Toggle Override (ensures sidebar can ALWAYS be reopened if closed)
+st.markdown("""
+<style>
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    z-index: 1000 !important;
+}
+[data-testid="collapsedControl"],
+[data-testid="stSidebarCollapsedControl"],
+button[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarCollapseButton"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 999999 !important;
+    top: 0.6rem !important;
+    left: 0.6rem !important;
+    position: fixed !important;
+}
+[data-testid="collapsedControl"] button,
+button[data-testid="stSidebarCollapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background: rgba(13, 20, 36, 0.95) !important;
+    border: 1px solid #38bdf8 !important;
+    color: #38bdf8 !important;
+    border-radius: 8px !important;
+    padding: 6px !important;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.4) !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
 # Initialize Session State
 if "authenticated_user" not in st.session_state:
     st.session_state["authenticated_user"] = None
